@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caiwei.Security.Mapper.UserMapper">
+    <insert id="addUser" parameterType="com.caiwei.Security.Entities.User">
+        insert into user(name, address, wealthEncryption)
+            value (#{name}, #{address}, #{wealthEncryption})
+    </insert>
+    <update id="updateToDelete">
+        update user
+        set isDelete = 1
+    </update>
+    <select id="selectOtherSide" resultType="com.caiwei.Security.Entities.User">
+        select *
+        from user
+        where address != #{address}
+          and isDelete = 0;
+    </select>
+</mapper>

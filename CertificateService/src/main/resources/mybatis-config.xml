@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="application.properties"/>
+
+    <environments default="development">
+        <!--        <environment id="development">
+                    <transactionManager type="JDBC"/>
+                    <dataSource type="POOLED">
+                        <property name="driver" value="${jdbc.driver}"/>
+                        <property name="url" value="${jdbc.url}"/>
+                        <property name="username" value="${jdbc.username}"/>
+                        <property name="password" value="${jdbc.password}"/>
+                    </dataSource>
+                </environment>-->
+
+
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="com.caiwei.Security.Config.MyDruidDataSourceFactory">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="maxActive" value="${spring.datasource.druid.max-active}"/>  <!--接下来是Druid连接池的属性配置-->
+                <property name="initialSize" value="${spring.datasource.druid.initial-size}"/>
+                <property name="minIdle" value="${spring.datasource.druid.min-idle}"/>
+                <property name="maxWait" value="${spring.datasource.druid.max-wait}"/>
+                <property name="testWhileIdle" value="false"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="Mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>
